@@ -7,7 +7,7 @@ const Darkmode = () => {
   return (
     <button
       onClick={() => setDark(!dark)}
-      className="dark:text-white cursor-pointer"
+      className="dark:text-white cursor-pointer outline-0"
     >
       {dark ? (
         <Sun className="w-8 h-8 border bg-gray-600 dark:bg-white dark:text-black p-1 rounded-full" /> 
