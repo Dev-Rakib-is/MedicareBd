@@ -14,7 +14,6 @@ const DesktopSidebar = () => {
         </Link>
         <h5 className="font-light text-green-600">appointment</h5>
       </div>
-
       {/* Navigation */}
       {!user && (
         <nav className="space-y-3 flex-1 p-2">
