@@ -46,7 +46,7 @@ const Home = () => {
 
   // Button click
   const handleButton = () => {
-    navigate(user ? "/book-appointment" : "/login");
+    navigate(user ? "/doctor-details" : "/login");
   };
 
   return (
@@ -58,7 +58,9 @@ const Home = () => {
         transition={{ duration: 0.6 }}
         className="text-center py-20 bg-violet-500 dark:bg-gray-800 rounded"
       >
-        <h1 className="text-5xl text-white font-bold">Your Health, Our Priority</h1>
+        <h1 className="text-5xl text-white font-bold">
+          Your Health, Our Priority
+        </h1>
         <p className="text-xl py-4 text-white">
           Book appointments with the best doctors — anytime, anywhere.
         </p>
@@ -82,15 +84,19 @@ const Home = () => {
           Popular Specializations
         </h2>
         {loadingSpecs ? (
-          <p className="text-center text-black dark:text-white">Loading Specializations...</p>
+          <p className="text-center text-black dark:text-white">
+            Loading Specializations...
+          </p>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {specializations.map((sp) => (
               <div
                 key={sp._id}
-                className="p-4 bg-white dark:bg-black/40 rounded shadow text-center"
+                className="p-4 bg-white dark:bg-gray-800 rounded shadow text-center"
               >
-                <p className="text-black dark:text-white font-semibold">{sp.name}</p>
+                <p className="text-black dark:text-white font-semibold">
+                  {sp.name}
+                </p>
               </div>
             ))}
           </div>
@@ -104,9 +110,13 @@ const Home = () => {
         transition={{ duration: 0.6, delay: 1 }}
         className="my-10"
       >
-        <h2 className="text-4xl text-center text-black dark:text-white pb-10">Our Doctors</h2>
+        <h2 className="text-4xl text-center text-black dark:text-white pb-10">
+          Our Doctors
+        </h2>
         {loadingDoctors ? (
-          <p className="text-center text-black dark:text-white">Loading Doctors...</p>
+          <p className="text-center text-black dark:text-white">
+            Loading Doctors...
+          </p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {doctors.map((doc) => (
@@ -114,8 +124,13 @@ const Home = () => {
                 key={doc._id}
                 className="p-4 bg-white dark:bg-black/40 rounded shadow"
               >
-                <p className="text-lg font-semibold text-black dark:text-white">{doc.name}</p>
-                <p className="text-black dark:text-white">{doc.specialization}</p>
+                <p className="text-lg font-semibold text-black dark:text-white">
+                  {doc.name}
+                </p>
+
+                <p className="text-black dark:text-white">
+                  {doc.specialization}
+                </p>
               </div>
             ))}
           </div>

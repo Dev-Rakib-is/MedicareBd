@@ -66,9 +66,9 @@ const Navbar = ({ onHamburgerClick }) => {
         </div>
 
         {/* Profile Avatar */}
-        {user?.profile.avatar&& (
+        {user?.photo_url && (
           <img
-            src={user.profile.avatar}
+            src={user.photo_url}
             alt="profile"
             className="w-10 h-10 rounded-full border border-black/40 dark:border-white/40 object-cover"
           />

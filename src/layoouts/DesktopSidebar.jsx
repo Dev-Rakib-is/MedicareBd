@@ -68,9 +68,9 @@ const DesktopSidebar = () => {
       {/* User Logout */}
       {user && (
         <motion.button
-          onClick={logout}
+          onClick={() => logout()}
           whileTap={{ scale: 0.95 }}
-          className="bg-red-600 font-bold text-white p-2 rounded m-2"
+          className="bg-red-600 font-semibold  text-white p-2 rounded m-2 cursor-pointer"
         >
           Logout
         </motion.button>

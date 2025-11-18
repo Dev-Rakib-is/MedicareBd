@@ -1,72 +1,65 @@
 import { useState } from "react";
 import { useAuth } from "../contex/AuthContex";
-import { Link, useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import api from "../api/api";
 import { Eye, EyeOff } from "lucide-react";
 
 const Login = () => {
-  const { setLoading, login } = useAuth();
+  const { login, setLoading } = useAuth();
   const navigate = useNavigate();
 
-  // Form states
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("PATIENT");
   const [error, setError] = useState("");
+  const [loading, setLocalLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  // Handle form submit
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
     try {
-      setLoading(true);
-      const { data } = await api.post("/auth/login", { email, password, role });
-      login(data);
+      setLocalLoading(true);
+      await login({ email, password, role });
       navigate("/");
     } catch (err) {
-      console.log(err);
-      const errorMassage = err.response?.data?.message || "Login Failed";
-      setError(errorMassage);
-
-      setTimeout(() => {
-        setError("");
-      }, 3000);
+      const errorMsg = err.response?.data?.message || "Login Failed";
+      setError(errorMsg);
+      setTimeout(() => setError(""), 3000);
     } finally {
-      setLoading(false);
+      setLocalLoading(false);
     }
   };
 
   return (
     <section className="flex items-center justify-center min-h-screen bg-white dark:bg-black">
-      {/* Form  */}
       <form
         onSubmit={handleLogin}
         className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl w-full max-w-md space-y-6 transition-all"
       >
-        {/*  Title */}
         <h3 className="text-2xl font-bold text-center text-gray-800 dark:text-white">
           Login
         </h3>
-        {/* Email Field */}
+
         <input
           type="email"
           placeholder="Email"
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white outline-0 transition-all"
+          className="input-box dark:placeholder-white/70"
           required
         />
-        {/* Password */}
+
         <div className="relative">
           <input
             type={showPassword ? "text" : "password"}
             placeholder="Password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white outline-0 transition-all"
+            className="input-box dark:placeholder-white/70"
             required
           />
-          {/* Eye Toggle button  */}
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
@@ -76,27 +69,32 @@ const Login = () => {
           </button>
         </div>
 
-        {/* Role Selection */}
         <select
+          value={role}
           onChange={(e) => setRole(e.target.value)}
-          className="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white outline-0 transition-all"
+          className="input-box dark:placeholder-white/70"
         >
           <option value="PATIENT">Patient</option>
           <option value="DOCTOR">Doctor</option>
         </select>
 
-        {/* Submit Button */}
         <motion.button
           whileTap={{ scale: 0.95 }}
+          disabled={loading}
           type="submit"
-          className="w-full py-3 rounded-xl border bg-green-600 text-white border-black/40 dark:border-white/40 cursor-pointer dark:text-white font-semibold text-lg shadow-md"
+          className={`w-full py-3 rounded-xl text-white border font-semibold text-lg shadow-md${
+            loading
+              ? " bg-purple-300 cursor-not-allowed opacity-70"
+              : " bg-purple-500 cursor-pointer"
+          }`}
         >
-          Login
+          {loading ? "Logging..." : "Login"}
         </motion.button>
-        {error && <p className="text-center text-xl text-red-600">{error}</p>}
-        {/* Registration Link */}
+
+        {error && <p className="text-center text-red-600">{error}</p>}
+
         <p className="text-center text-gray-600 dark:text-gray-300">
-          Don't have an account?{" "}
+          Don't have an account?
           <Link
             to="/registration"
             className="text-violet-600 font-semibold hover:underline"

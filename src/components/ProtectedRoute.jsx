@@ -1,13 +1,11 @@
 import { Navigate, useLocation } from "react-router";
 import { useAuth } from "../contex/AuthContex";
 
-
-
-const ProtectedRoute = ({ children,role }) => {
-    const location = useLocation()
-    const {loading,user} = useAuth()
+const ProtectedRoute = ({ children, role }) => {
+  const location = useLocation();
+  const { loading, user } = useAuth();
   if (loading) {
-    return<p className="text-black dark:text-white">Loading</p>;
+    return <p className="text-black dark:text-white">Loading</p>;
   }
 
   if (!user) {
@@ -15,9 +13,15 @@ const ProtectedRoute = ({ children,role }) => {
   }
 
   if (role && user.role !== role) {
-    return <Navigate to={"/unauthorized"} replace state={{from:location.pathname}}/>
+    return (
+      <Navigate
+        to={"/unauthorized"}
+        replace
+        state={{ from: location.pathname }}
+      />
+    );
   }
   return <>{children}</>;
 };
 
-export default ProtectedRoute;  
+export default ProtectedRoute;
