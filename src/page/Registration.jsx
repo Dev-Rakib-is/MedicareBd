@@ -211,7 +211,7 @@ export const Registration = () => {
             disabled={loading}
             whileTap={{ scale: 0.95 }}
             type="submit"
-            className="text-lg font-semibold bg-green-600 text-white/90 border px-3 py-2 rounded cursor-pointer shadow-md"
+            className="text-lg font-semibold bg-green-600 text-white/90 border px-3 py-2 rounded cursor-pointer shadow-md w-full"
           >
             {loading ? "Registering..." : "Submit"}
           </motion.button>

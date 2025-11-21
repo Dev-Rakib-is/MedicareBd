@@ -10,25 +10,26 @@ import api from "../api/api";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  // Check user authenticated
-  const checkAuth = useCallback(async () => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      setUser(null);
-      setLoading(false);
-      return;
-    }
-
+  const [user, setUser] = useState(() => {
     try {
-      const { data } = await api.get("/auth/me");
-      setUser(data.user || data);
-    } catch (error) {
-      console.error("Auth fetch error:", error);
-      localStorage.removeItem("token");
+      const savedUser = localStorage.getItem("user");
+      return savedUser ? JSON.parse(savedUser) : null;
+    } catch (err) {
+      return null;
+    }
+  });
+  const [loading, setLoading] = useState(false);
+
+  //  Check user auth from server
+  const checkAuth = useCallback(async () => {
+    setLoading(true);
+    try {
+      const { data } = await api.get("/auth/me", { withCredentials: true });
+      setUser(data.user);
+      localStorage.setItem("user", JSON.stringify(data.user));
+    } catch (err) {
       setUser(null);
+      localStorage.removeItem("user");
     } finally {
       setLoading(false);
     }
@@ -38,32 +39,36 @@ export const AuthProvider = ({ children }) => {
     checkAuth();
   }, [checkAuth]);
 
-  // Login
-  const login = async ({ email, password, role }) => {
+  //  Login
+  const login = async ({ email, password }) => {
     setLoading(true);
     try {
-      const { data } = await api.post("/auth/login", { email, password, role });
-      if (data.token) localStorage.setItem("token", data.token); 
-      setUser(data.user || data);
+      const { data } = await api.post(
+        "/auth/login",
+        { email, password },
+        { withCredentials: true }
+      );
+      setUser(data.user);
+      localStorage.setItem("user", JSON.stringify(data.user));
       return data;
     } catch (error) {
-      console.error(error.response?.data || error.message);
       throw error.response?.data || error.message;
     } finally {
       setLoading(false);
     }
   };
 
-  // Register Patient
+  //  Register Patient
   const registerPatient = async (patientData) => {
     setLoading(true);
     try {
-      const { data } = await api.post("/auth/register/patient", patientData);
-      if (data.token) localStorage.setItem("token", data.token);
-      setUser(data.user || data);
+      const { data } = await api.post("/auth/register/patient", patientData, {
+        withCredentials: true,
+      });
+      setUser(data.user);
+      localStorage.setItem("user", JSON.stringify(data.user));
       return data;
     } catch (error) {
-      console.error(error.response?.data || error.message);
       throw error.response?.data || error.message;
     } finally {
       setLoading(false);
@@ -74,12 +79,13 @@ export const AuthProvider = ({ children }) => {
   const registerDoctor = async (doctorData) => {
     setLoading(true);
     try {
-      const { data } = await api.post("/auth/register/doctor", doctorData);
-      if (data.token) localStorage.setItem("token", data.token);
-      setUser(data.user || data);
+      const { data } = await api.post("/auth/register/doctor", doctorData, {
+        withCredentials: true,
+      });
+      setUser(data.user);
+      localStorage.setItem("user", JSON.stringify(data.user));
       return data;
     } catch (error) {
-      console.error(error.response?.data || error.message);
       throw error.response?.data || error.message;
     } finally {
       setLoading(false);
@@ -87,23 +93,20 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Logout
-  const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setUser(null);
+  const logout = async () => {
+    try {
+      await api.post("/auth/logout", {}, { withCredentials: true });
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setUser(null);
+      localStorage.removeItem("user");
+    }
   };
 
   return (
     <AuthContext.Provider
-      value={{
-        user,
-        loading,
-        login,
-        registerPatient,
-        registerDoctor,
-        logout,
-        checkAuth,
-      }}
+      value={{ user, loading, login, registerPatient, registerDoctor, logout }}
     >
       {children}
     </AuthContext.Provider>

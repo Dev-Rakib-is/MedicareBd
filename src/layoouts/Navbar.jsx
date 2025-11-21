@@ -2,7 +2,7 @@ import { TextAlignStart } from "lucide-react";
 import Darkmode from "../components/ui/Darkmode";
 import { useAuth } from "../contex/AuthContex";
 import logo from "/Company logo.png";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { motion } from "motion/react";
 
 const Navbar = ({ onHamburgerClick }) => {
@@ -21,7 +21,7 @@ const Navbar = ({ onHamburgerClick }) => {
       : "Guest");
 
   return (
-    <div className="flex justify-between items-center bg-gray-300 dark:bg-gray-800 px-6 py-3 border-b dark:border-white/40 border-black/40">
+    <div className="flex justify-between items-center bg-gray-300 dark:bg-gray-800 px-6 py-3 border-b dark:border-white/40 border-black/40 fixed top-0 left-0 right-0 md:left-64 z-50">
       {/* Left Side */}
       <div className="flex items-center gap-2">
         {/* Hamburger */}
@@ -56,22 +56,22 @@ const Navbar = ({ onHamburgerClick }) => {
             </a>
           </div>
         )}
-
-        <Darkmode />
-
         {/* Profile Info */}
         <div className="text-black dark:text-white hidden md:block">
           <p className="text-base font-semibold">{displayname}</p>
           <p className="font-extralight text-sm">{user?.role}</p>
         </div>
-
+        {/* DarkMode  */}
+        <Darkmode />
         {/* Profile Avatar */}
         {user?.photo_url && (
-          <img
-            src={user.photo_url}
-            alt="profile"
-            className="w-10 h-10 rounded-full border border-black/40 dark:border-white/40 object-cover"
-          />
+          <Link to="/setting">
+            <img
+              src={user.photo_url}
+              alt="profile"
+              className="w-10 h-10 rounded-full border border-black/40 dark:border-white/40 object-cover"
+            />
+          </Link>
         )}
       </div>
     </div>

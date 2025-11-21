@@ -8,7 +8,11 @@ import { Registration } from "./page/Registration";
 import BookAppointment from "./page/BookAppointment";
 import DoctorDetails from "./page/DoctorDetails";
 
+import { useAuth } from "./contex/AuthContex";
+
 function App() {
+  const { loading } = useAuth();
+  
   return (
     <Routes>
       <Route element={<RootLayouts />}>
@@ -18,6 +22,7 @@ function App() {
         <Route path="/registration" element={<Registration />} />
         <Route path="/doctor-details" element={<DoctorDetails />} />
         <Route path="/book-appointment" element={<BookAppointment />} />
+        <Route path="/setting" element={<BookAppointment />} />
       </Route>
     </Routes>
   );
