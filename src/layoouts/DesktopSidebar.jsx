@@ -64,48 +64,48 @@ const DesktopSidebar = () => {
     );
   }
 
-  const patientNav = [
-    { label: "Home", to: "/" },
-    { label: "Dashboard", to: "/dashboard" },
-    { label: "Appointment", to: "/appointment" },
-    { label: "Bills", to: "/bills" },
-    { label: "Documents", to: "/documents" },
-    { label: "Notice Board", to: "/notice" },
-    { label: "Invoice", to: "/invoice" },
-    { label: "Live Consultations", to: "/consultations" },
-    { label: "Patient Cases", to: "/patient-cases" },
-    { label: "Prescriptions", to: "/prescriptions" },
-    { label: "Reports", to: "/reports" },
-    { label: "Settings", to: "/settings" },
-  ];
+const patientNav = [
+  { label: "Home", to: "/" },
+  { label: "Dashboard", to: "/dashboard" },
+  { label: "Appointment", to: "/appointment" },
+  { label: "Bills", to: "/bills" },
+  { label: "Documents", to: "/documents" },
+  { label: "Notice Board", to: "/notice" },
+  { label: "Invoice", to: "/invoice" },
+  { label: "Live Consultations", to: "/consultations" },
+  { label: "Patient Cases", to: "/patient-cases" },
+  { label: "Prescriptions", to: "/prescriptions" },
+  { label: "Reports", to: "/reports" },
+  { label: "Setting", to: "/setting/profile" },
+];
 
-  const doctorNav = [
-    { label: "Home", to: "/" },
-    { label: "Appointment", to: "/appointment" },
-    { label: "Doctors", to: "/doctors" },
-    { label: "Schedules", to: "/schedules" },
-    { label: "Prescription", to: "/prescription" },
-    { label: "Documents", to: "/documents" },
-    { label: "Diagnosis", to: "/diagnosis" },
-    { label: "Notice Board", to: "/notice-board" },
-    { label: "Live Consultation", to: "/consultation" },
-    { label: "My Payroll", to: "/payroll" },
-    { label: "Patients", to: "/patients" },
-    { label: "Reports", to: "/reports" },
-    { label: "SMS", to: "/sms" },
-    { label: "Settings", to: "/setting" },
-  ];
+const doctorNav = [
+  { label: "Home", to: "/" },
+  { label: "Appointment", to: "/appointment" },
+  { label: "Doctors", to: "/doctors" },
+  { label: "Schedules", to: "/schedules" },
+  { label: "Prescription", to: "/prescription" },
+  { label: "Documents", to: "/documents" },
+  { label: "Diagnosis", to: "/diagnosis" },
+  { label: "Notice Board", to: "/notice-board" },
+  { label: "Live Consultation", to: "/consultation" },
+  { label: "My Payroll", to: "/payroll" },
+  { label: "Patients", to: "/patients" },
+  { label: "Reports", to: "/reports" },
+  { label: "SMS", to: "/sms" },
+  { label: "Setting", to: "/setting/profile" },
+];
 
-  const adminNav = [
-    { label: "Dashboard", to: "/admin/dashboard" },
-    { label: "Users", to: "/admin/users" },
-    { label: "Doctors", to: "/admin/doctors" },
-    { label: "Appointments", to: "/admin/appointments" },
-    { label: "Departments", to: "/admin/departments" },
-    { label: "Payments", to: "/admin/payments" },
-    { label: "Reports", to: "/admin/reports" },
-    { label: "Settings", to: "/admin/settings" },
-  ];
+const adminNav = [
+  { label: "Dashboard", to: "/admin/dashboard" },
+  { label: "Users", to: "/admin/users" },
+  { label: "Doctors", to: "/admin/doctors" },
+  { label: "Appointments", to: "/admin/appointments" },
+  { label: "Departments", to: "/admin/departments" },
+  { label: "Payments", to: "/admin/payments" },
+  { label: "Reports", to: "/admin/reports" },
+  { label: "Setting", to: "/setting/profile" },
+];
 
   const renderNav = (list) =>
     list.map((item) => (

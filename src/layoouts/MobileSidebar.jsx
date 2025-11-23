@@ -58,48 +58,49 @@ const MobileSidebar = ({ isOpen, onClose }) => {
   }
 
   // ROLE BASED NAVIGATION LISTS
-  const patientNav = [
-    { label: "Home", to: "/" },
-    { label: "Dashboard", to: "/dashboard" },
-    { label: "Appointment", to: "/appointment" },
-    { label: "Bills", to: "/bills" },
-    { label: "Documents", to: "/documents" },
-    { label: "Notice Board", to: "/notice" },
-    { label: "Invoice", to: "/invoice" },
-    { label: "Live Consultations", to: "/consultations" },
-    { label: "Patient Cases", to: "/patient-cases" },
-    { label: "Prescriptions", to: "/prescriptions" },
-    { label: "Reports", to: "/reports" },
-    { label: "Settings", to: "/settings" },
-  ];
+const patientNav = [
+  { label: "Home", to: "/" },
+  { label: "Dashboard", to: "/dashboard" },
+  { label: "Appointment", to: "/appointment" },
+  { label: "Bills", to: "/bills" },
+  { label: "Documents", to: "/documents" },
+  { label: "Notice Board", to: "/notice" },
+  { label: "Invoice", to: "/invoice" },
+  { label: "Live Consultations", to: "/consultations" },
+  { label: "Patient Cases", to: "/patient-cases" },
+  { label: "Prescriptions", to: "/prescriptions" },
+  { label: "Reports", to: "/reports" },
+  { label: "Setting", to: "/setting/profile" },
+];
 
-  const doctorNav = [
-    { label: "Home", to: "/" },
-    { label: "Appointment", to: "/appointment" },
-    { label: "Doctors", to: "/doctors" },
-    { label: "Schedules", to: "/schedules" },
-    { label: "Prescription", to: "/prescription" },
-    { label: "Documents", to: "/documents" },
-    { label: "Diagnosis", to: "/diagnosis" },
-    { label: "Notice Board", to: "/notice-board" },
-    { label: "Live Consultation", to: "/consultation" },
-    { label: "My Payroll", to: "/payroll" },
-    { label: "Patients", to: "/patients" },
-    { label: "Reports", to: "/reports" },
-    { label: "SMS", to: "/sms" },
-    { label: "Settings", to: "/setting" },
-  ];
+const doctorNav = [
+  { label: "Home", to: "/" },
+  { label: "Appointment", to: "/appointment" },
+  { label: "Doctors", to: "/doctors" },
+  { label: "Schedules", to: "/schedules" },
+  { label: "Prescription", to: "/prescription" },
+  { label: "Documents", to: "/documents" },
+  { label: "Diagnosis", to: "/diagnosis" },
+  { label: "Notice Board", to: "/notice-board" },
+  { label: "Live Consultation", to: "/consultation" },
+  { label: "My Payroll", to: "/payroll" },
+  { label: "Patients", to: "/patients" },
+  { label: "Reports", to: "/reports" },
+  { label: "SMS", to: "/sms" },
+  { label: "Setting", to: "/setting/profile" },
+];
 
-  const adminNav = [
-    { label: "Dashboard", to: "/admin/dashboard" },
-    { label: "Users", to: "/admin/users" },
-    { label: "Doctors", to: "/admin/doctors" },
-    { label: "Appointments", to: "/admin/appointments" },
-    { label: "Departments", to: "/admin/departments" },
-    { label: "Payments", to: "/admin/payments" },
-    { label: "Reports", to: "/admin/reports" },
-    { label: "Settings", to: "/admin/settings" },
-  ];
+const adminNav = [
+  { label: "Dashboard", to: "/admin/dashboard" },
+  { label: "Users", to: "/admin/users" },
+  { label: "Doctors", to: "/admin/doctors" },
+  { label: "Appointments", to: "/admin/appointments" },
+  { label: "Departments", to: "/admin/departments" },
+  { label: "Payments", to: "/admin/payments" },
+  { label: "Reports", to: "/admin/reports" },
+  { label: "Setting", to: "/setting/profile" },
+];
+
 
   // RENDER NAV HELPER
   const renderNav = (list) =>
@@ -123,26 +124,8 @@ const MobileSidebar = ({ isOpen, onClose }) => {
       initial={{ x: "-100%" }}
       animate={{ x: isOpen ? 0 : "-100%" }}
       transition={{ type: "spring", stiffness: 90 }}
-      className="md:hidden fixed top-0 left-0 bg-gray-200 dark:bg-gray-900 w-64 h-full z-40 overflow-y-auto"
+      className="md:hidden fixed top-0 left-0 bg-gray-200 dark:bg-gray-900 w-64 h-full z-40 overflow-y-auto mt-16"
     >
-      {/* Header */}
-      <div className="flex justify-between p-4 border-b border-black/40 dark:border-white/40">
-        <div>
-          <Link
-            to="/"
-            className="text-2xl font-bold text-green-600"
-            onClick={onClose}
-          >
-            Doctor
-          </Link>
-          <p className="text-xs font-light dark:text-white">Appointment</p>
-        </div>
-
-        <motion.button whileTap={{ scale: 0.9 }} onClick={onClose}>
-          <X className="dark:text-white" />
-        </motion.button>
-      </div>
-
       {/* NAVIGATION */}
       <nav className="flex flex-col items-center space-y-3 p-2">
         {user?.role === "PATIENT" && renderNav(patientNav)}

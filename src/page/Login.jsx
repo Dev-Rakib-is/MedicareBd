@@ -2,11 +2,10 @@ import { useState } from "react";
 import { useAuth } from "../contex/AuthContex";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import api from "../api/api";
 import { Eye, EyeOff } from "lucide-react";
 
 const Login = () => {
-  const { login, setLoading } = useAuth();
+  const { login} = useAuth();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");

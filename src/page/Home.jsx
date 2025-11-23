@@ -162,8 +162,15 @@ const Home = () => {
                 key={doc._id}
                 className="p-4 bg-white rounded shadow dark:bg-gray-900"
               >
-                <img src={doc.image} alt="Doctor Photo" />
-                <p className="text-lg font-semibold text-black dark:text-white">
+                {/* DOCTOR IMAGE  */}
+                  {doc.photo_url && (<img
+                    src={doc.photo_url}
+                    alt="Doctor Photo"
+                    className=" object-cover rounded-full w-28 h-28 mx-auto"
+  
+                  />)}
+                
+                <p className="text-lg font-bold text-black dark:text-white">
                   {doc.name}
                 </p>
                 <p className="text-black dark:text-white">

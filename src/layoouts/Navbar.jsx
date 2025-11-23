@@ -2,7 +2,7 @@ import { TextAlignStart } from "lucide-react";
 import Darkmode from "../components/ui/Darkmode";
 import { useAuth } from "../contex/AuthContex";
 import logo from "/Company logo.png";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { motion } from "motion/react";
 
 const Navbar = ({ onHamburgerClick }) => {
@@ -19,6 +19,18 @@ const Navbar = ({ onHamburgerClick }) => {
       : user?.role === "ADMIN"
       ? "Admin"
       : "Guest");
+
+
+      // Setting navigate by Role 
+      const settingPath = ()=>{
+        if (!user) return navigate("/") ;
+        switch (user.role) {
+          case "DOCTOR" : return "/setting/profile";
+          case "PATIENT" : return "/setting/profile";
+          case "ADMIN" : return "/setting/profile"
+          default : return "/setting/profile"
+        }
+      }
 
   return (
     <div className="flex justify-between items-center bg-gray-300 dark:bg-gray-800 px-6 py-3 border-b dark:border-white/40 border-black/40 fixed top-0 left-0 right-0 md:left-64 z-50">
@@ -64,14 +76,13 @@ const Navbar = ({ onHamburgerClick }) => {
         {/* DarkMode  */}
         <Darkmode />
         {/* Profile Avatar */}
-        {user?.photo_url && (
-          <Link to="/setting">
+        {user?.photo_url && (         
             <img
+             onClick={()=>navigate(settingPath())}
               src={user.photo_url}
               alt="profile"
               className="w-10 h-10 rounded-full border border-black/40 dark:border-white/40 object-cover"
             />
-          </Link>
         )}
       </div>
     </div>
@@ -79,3 +90,6 @@ const Navbar = ({ onHamburgerClick }) => {
 };
 
 export default Navbar;
+
+
+
