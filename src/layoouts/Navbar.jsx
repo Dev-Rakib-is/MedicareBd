@@ -9,26 +9,27 @@ const Navbar = ({ onHamburgerClick }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  const displayname =
-    user?.profile?.name ||
-    user?.name ||
-    (user?.role === "DOCTOR"
-      ? "Doctor"
-      : user?.role === "PATIENT"
-      ? "Patient"
-      : user?.role === "ADMIN"
-      ? "Admin"
-      : "Guest");
+ const displayname =
+  user?.username || 
+  user?.profile?.name || 
+  user?.name || 
+  (user?.role === "DOCTOR"
+    ? "Doctor"
+    : user?.role === "PATIENT"
+    ? "Patient"
+    : user?.role === "ADMIN"
+    ? "Admin"
+    : "Guest");
 
 
       // Setting navigate by Role 
       const settingPath = ()=>{
         if (!user) return navigate("/") ;
         switch (user.role) {
-          case "DOCTOR" : return "/setting/profile";
-          case "PATIENT" : return "/setting/profile";
-          case "ADMIN" : return "/setting/profile"
-          default : return "/setting/profile"
+          case "DOCTOR" : return "/setting/account";
+          case "PATIENT" : return "/setting/account";
+          case "ADMIN" : return "/setting/account"
+          default : return "/setting/account"
         }
       }
 
@@ -81,7 +82,7 @@ const Navbar = ({ onHamburgerClick }) => {
              onClick={()=>navigate(settingPath())}
               src={user.photo_url}
               alt="profile"
-              className="w-10 h-10 rounded-full border border-black/40 dark:border-white/40 object-cover"
+              className="w-10 h-10 rounded-full border border-black/40 dark:border-white/40 object-cover cursor-pointer"
             />
         )}
       </div>

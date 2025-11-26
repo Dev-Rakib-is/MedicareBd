@@ -11,11 +11,16 @@ import DoctorDetails from "./page/DoctorDetails";
 import { useAuth } from "./contex/AuthContex";
 
 import SettingsLayout from './layoouts/SettingsLayout';
-import ProfileSettings from './page/ProfileSettings';
+
 import AccountSettings from './page/AccountSettings';
 import PreferenceSettings from './page/PreferenceSettings';
 import NotificationSettings from './page/NotificationSettings';
 import SecuritySettings from './page/SecuritySettings';
+import Notification from "./page/Notification";
+import Dashboard from "./page/Dashboard";
+import Appointment from "./page/Appointment";
+import BillsPage from "./page/Bill";
+import Documents from "./page/Documents";
 
 function App() {
   const { loading } = useAuth();
@@ -29,9 +34,13 @@ function App() {
         <Route path="/registration" element={<Registration />} />
         <Route path="/doctor-details" element={<DoctorDetails />} />
         <Route path="/book-appointment" element={<BookAppointment />} />
+        <Route path="/notifications" element={<Notification/>}/>
+        <Route path="/dashboard" element={<Dashboard/>}/>
+        <Route path="/appointment" element={<Appointment/>}/>
+        <Route path="/bills" element={<BillsPage/>}/>
+        <Route path="documents" element={<Documents/>}/>
         {/* Settings Route */}
         <Route path="setting" element={<SettingsLayout />}>
-          <Route path="profile" element={<ProfileSettings />} />
           <Route path="account" element={<AccountSettings />} />
           <Route path="preferences" element={<PreferenceSettings />} />
           <Route path="notifications" element={<NotificationSettings />} />

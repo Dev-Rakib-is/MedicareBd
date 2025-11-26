@@ -72,11 +72,12 @@ const patientNav = [
   { label: "Documents", to: "/documents" },
   { label: "Notice Board", to: "/notice" },
   { label: "Invoice", to: "/invoice" },
+  { label: "Notifications", to: "/notifications" },
   { label: "Live Consultations", to: "/consultations" },
   { label: "Patient Cases", to: "/patient-cases" },
   { label: "Prescriptions", to: "/prescriptions" },
   { label: "Reports", to: "/reports" },
-  { label: "Setting", to: "/setting/profile" },
+  { label: "Settings", to: "/setting/account" },
 ];
 
 const doctorNav = [
@@ -84,6 +85,7 @@ const doctorNav = [
   { label: "Appointment", to: "/appointment" },
   { label: "Doctors", to: "/doctors" },
   { label: "Schedules", to: "/schedules" },
+  { label: "Notifications", to: "/notifications" },
   { label: "Prescription", to: "/prescription" },
   { label: "Documents", to: "/documents" },
   { label: "Diagnosis", to: "/diagnosis" },
@@ -93,18 +95,18 @@ const doctorNav = [
   { label: "Patients", to: "/patients" },
   { label: "Reports", to: "/reports" },
   { label: "SMS", to: "/sms" },
-  { label: "Setting", to: "/setting/profile" },
+  { label: "Settings", to: "/setting/account" },
 ];
 
 const adminNav = [
   { label: "Dashboard", to: "/admin/dashboard" },
   { label: "Users", to: "/admin/users" },
+  { label: "Notifications", to: "/notifications" },
   { label: "Doctors", to: "/admin/doctors" },
-  { label: "Appointments", to: "/admin/appointments" },
   { label: "Departments", to: "/admin/departments" },
   { label: "Payments", to: "/admin/payments" },
   { label: "Reports", to: "/admin/reports" },
-  { label: "Setting", to: "/setting/profile" },
+  { label: "Settings", to: "/setting/account" },
 ];
 
   const renderNav = (list) =>
@@ -124,7 +126,7 @@ const adminNav = [
 
   return (
     <aside className="hidden md:flex flex-col bg-gray-200 dark:bg-gray-900 w-64 h-screen overflow-y-auto border-r border-black/40 dark:border-white/40">
-      <div className="text-center mb-4 p-4 border-b border-black/40 bg-white dark:bg-gray-900 dark:border-white/40 fixed top-0 left-0 w-64">
+      <div className="text-center mb-4 p-2 border-b border-black/40 bg-white dark:bg-gray-900 dark:border-white/40 fixed top-0 left-0 w-64">
         <Link to="/" className="text-2xl font-bold text-green-600">
           Doctor
         </Link>
@@ -132,7 +134,7 @@ const adminNav = [
       </div>
 
       {/* ROLE BASED NAVIGATION */}
-      <nav className="flex flex-col space-y-3 items-center p-2 mt-24">
+      <nav className="flex flex-col space-y-3 items-center p-2 mt-20">
         {user?.role === "PATIENT" && renderNav(patientNav)}
         {user?.role === "DOCTOR" && renderNav(doctorNav)}
         {user?.role === "ADMIN" && renderNav(adminNav)}

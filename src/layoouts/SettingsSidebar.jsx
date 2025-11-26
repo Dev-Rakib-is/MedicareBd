@@ -6,7 +6,6 @@ import MobileSidebar from "./MobileSidebar";
 const SettingsSidebar = ({ isOpen, onClose }) => {
   const navigate = useNavigate()
   const menu = [
-    { label: "Profile", to: "/setting/profile" },
     { label: "Account", to: "/setting/account" },
     { label: "Preferences", to: "/setting/preferences" },
     { label: "Notifications", to: "/setting/notifications" },
@@ -23,7 +22,7 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
     <>
       {/* Desktop Sidebar */}
       {isDesktop && (
-        <aside className="hidden md:flex flex-col w-64 bg-white shadow-md space-y-2 sticky top-0 h-screen">
+        <aside className="hidden md:flex flex-col w-64 bg-white dark:bg-black shadow-md space-y-2 sticky top-0 h-screen border-r dark:border-white/40 border-black/40">
                     <div className="text-center mb p-4 border-b border-black/40 dark:border-white/40">
           <Link to="/" className="text-2xl font-bold text-green-600">
             Doctor
@@ -37,7 +36,7 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
               className={({ isActive }) =>
                 isActive
                   ? "bg-green-600 text-white px-4 py-2 rounded font-medium"
-                  : "text-gray-700 hover:bg-gray-200 px-4 py-2 rounded transition"
+                  : "text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:text-black px-4 py-2 rounded transition"
               }
             >
               {item.label}
@@ -55,7 +54,7 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
              animate={{ x: 0 }}
              exit={{x:"-100%"}}
              transition={{ type: "spring", stiffness: 90 }}
-             className={`${mobileClass} mt-16`}>
+             className={`${mobileClass} mt-16 bg-white dark:bg-gray-950`}>
           {menu.map((item) => (
             <NavLink
               key={item.to}
@@ -64,7 +63,7 @@ const SettingsSidebar = ({ isOpen, onClose }) => {
               className={({ isActive }) =>
                 isActive
                   ? "bg-green-600 text-white px-4 py-2 rounded font-medium block mb-2"
-                  : "text-gray-700 hover:bg-gray-200 px-4 py-2 rounded block mb-2"
+                  : "text-gray-700 dark:text-white hover:bg-gray-200 px-4 py-2 rounded block mb-2"
               }
             >
               {item.label}
