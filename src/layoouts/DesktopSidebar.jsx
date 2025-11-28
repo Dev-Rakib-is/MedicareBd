@@ -90,7 +90,7 @@ const doctorNav = [
   { label: "Documents", to: "/documents" },
   { label: "Diagnosis", to: "/diagnosis" },
   { label: "Notice Board", to: "/notice-board" },
-  { label: "Live Consultation", to: "/consultation" },
+  { label: "Live Consultations", to: "/consultations" },
   { label: "My Payroll", to: "/payroll" },
   { label: "Patients", to: "/patients" },
   { label: "Reports", to: "/reports" },

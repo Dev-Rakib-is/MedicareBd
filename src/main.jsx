@@ -6,6 +6,15 @@ import { BrowserRouter } from "react-router";
 import { AuthProvider } from "./contex/AuthContex.jsx";
 import { ThemeProvider } from "./contex/ThemeContex.jsx";
 
+import { Buffer } from "buffer";
+import process from "process";
+import EventEmitter from "events";
+
+window.Buffer = Buffer;
+window.process = process;
+window.EventEmitter = EventEmitter;
+
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>

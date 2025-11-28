@@ -1,9 +1,79 @@
-import React from 'react'
+import { useEffect, useState } from "react";
+import api from "../api/api";
 
 const Notification = () => {
-  return (
-    <div className='text-red-500 mt-20'>Notification</div>
-  )
-}
+  const [notifications, setNotifications] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-export default Notification
+  // fetch notifications
+  const fetchNotifications = async () => {
+    try {
+      const res = await api.get("/notifications");
+      setNotifications(res.data.notifications);
+    } catch (err) {
+      setError("Failed to load notifications");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchNotifications();
+  }, []);
+
+  // Mark notification as read
+  const markAsRead = async (id) => {
+    try {
+      await api.patch(`/notifications/${id}/read`);
+      setNotifications((prev) =>
+        prev.map((n) =>
+          n._id === id ? { ...n, isRead: true } : n
+        )
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  if (loading) return <p className="text-center mt-16">Loading...</p>;
+  if (error) return <p className="text-center text-red-500">{error}</p>;
+
+  return (
+    <div className="max-w-3xl mx-auto mt-16 p-5">
+      <h1 className="text-2xl font-bold mb-4">Notifications</h1>
+
+      {notifications.length === 0 ? (
+        <p className="text-gray-500">No notifications found.</p>
+      ) : (
+        <div className="space-y-3">
+          {notifications.map((n) => (
+            <div
+              key={n._id}
+              className={`p-4 rounded-lg border shadow-sm flex justify-between items-center
+              ${n.isRead ? "bg-gray-100" : "bg-blue-50"}`}
+            >
+              <div>
+                <p className="font-medium">{n.message}</p>
+                <p className="text-xs text-gray-500">
+                  {new Date(n.createdAt).toLocaleString()}
+                </p>
+              </div>
+
+              {!n.isRead && (
+                <button
+                  onClick={() => markAsRead(n._id)}
+                  className="px-3 py-1 bg-green-600 text-white rounded text-sm"
+                >
+                  Mark Read
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Notification;

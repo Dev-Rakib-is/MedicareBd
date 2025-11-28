@@ -1,11 +1,14 @@
 // src/components/invoice/Invoice.jsx
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import axios from "axios";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import { motion } from 'framer-motion';
+
 
 const Invoice = ({ invoiceId }) => {
   const [invoice, setInvoice] = useState(null);
+  const [loading,setLoading]= useState("")
 
   useEffect(() => {
     const fetchInvoice = async () => {
@@ -67,7 +70,7 @@ const Invoice = ({ invoiceId }) => {
     <div className="p-4 bg-white rounded shadow-md max-w-3xl mx-auto mt-16">
       <h2 className="text-2xl font-bold mb-4">Invoice</h2>
       <div className="mb-4">
-        <p><strong>Invoice #:</strong> {invoice._id ?? "N/A"}</p>
+        <p><strong>Invoice :</strong> {invoice._id ?? "N/A"}</p>
         <p><strong>Date:</strong> {invoice.createdAt ? new Date(invoice.createdAt).toLocaleDateString() : "N/A"}</p>
         <p><strong>Patient:</strong> {invoice.patient?.name ?? "N/A"}</p>
         <p><strong>Doctor:</strong> {invoice.doctor?.name ?? "N/A"}</p>
@@ -106,12 +109,14 @@ const Invoice = ({ invoiceId }) => {
         <p><strong>Status:</strong> {invoice.status ?? "N/A"}</p>
       </div>
 
-      <button
+      <motion.button
+      disabled={loading}
+        whileTap={{scale:0.95}}
         onClick={handleDownloadPDF}
-        className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+        className={`px-4 py-2  text-white rounded  ${loading? "bg-green-300 cursor-not-allowed" :"bg-green-600 hover:bg-green-700 cursor-pointer"}`}
       >
         Download PDF
-      </button>
+      </motion.button>
     </div>
   );
 };
