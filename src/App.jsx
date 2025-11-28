@@ -7,11 +7,7 @@ import Login from "./page/Login";
 import { Registration } from "./page/Registration";
 import BookAppointment from "./page/BookAppointment";
 import DoctorDetails from "./page/DoctorDetails";
-
-import { useAuth } from "./contex/AuthContex";
-
 import SettingsLayout from './layoouts/SettingsLayout';
-
 import AccountSettings from './page/AccountSettings';
 import PreferenceSettings from './page/PreferenceSettings';
 import NotificationSettings from './page/NotificationSettings';
@@ -21,9 +17,11 @@ import Dashboard from "./page/Dashboard";
 import Appointment from "./page/Appointment";
 import BillsPage from "./page/Bill";
 import Documents from "./page/Documents";
+import LiveConsultation from "./page/LiveConsultations";
+import NoticeBoard from "./page/NoticeBoard";
+import Invoice from "./page/Incoice";
 
 function App() {
-  const { loading } = useAuth();
 
   return (
     <Routes>
@@ -37,8 +35,11 @@ function App() {
         <Route path="/notifications" element={<Notification/>}/>
         <Route path="/dashboard" element={<Dashboard/>}/>
         <Route path="/appointment" element={<Appointment/>}/>
+        <Route path="notice" element={<NoticeBoard/>}/>
         <Route path="/bills" element={<BillsPage/>}/>
-        <Route path="documents" element={<Documents/>}/>
+        <Route path="/documents" element={<Documents/>}/>
+        <Route path="/consultations" element={<LiveConsultation/>}/>
+        <Route path="/invoice" element={<Invoice/>}/>
         {/* Settings Route */}
         <Route path="setting" element={<SettingsLayout />}>
           <Route path="account" element={<AccountSettings />} />
