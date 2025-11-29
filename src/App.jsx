@@ -20,6 +20,9 @@ import Documents from "./page/Documents";
 import LiveConsultation from "./page/LiveConsultations";
 import NoticeBoard from "./page/NoticeBoard";
 import Invoice from "./page/Incoice";
+import Payroll from "./page/Payroll";
+import PatientsPage from "./page/PatientsPage";
+import PatientCases from "./page/PatientCases";
 
 function App() {
 
@@ -40,6 +43,9 @@ function App() {
         <Route path="/documents" element={<Documents/>}/>
         <Route path="/consultations" element={<LiveConsultation/>}/>
         <Route path="/invoice" element={<Invoice/>}/>
+        <Route path="/payroll" element={<Payroll/>}/>
+        <Route path="/patients" element={<PatientsPage/>}/>
+        <Route path="/patient-cases"  element={<PatientCases/>}/>
         {/* Settings Route */}
         <Route path="setting" element={<SettingsLayout />}>
           <Route path="account" element={<AccountSettings />} />
